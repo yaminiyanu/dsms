@@ -1,0 +1,57 @@
+        -:    0:Source:deleteProduct.c
+        -:    0:Graph:a-deleteProduct.gcno
+        -:    0:Data:a-deleteProduct.gcda
+        -:    0:Runs:2
+        -:    1:#include <header.h>
+        -:    2:
+        -:    3:/* Delete function start	*/
+        -:    4:
+        1:    5:void deleteProduct()
+        -:    6:{
+        -:    7:	char code[MAX], product[MAX];
+        -:    8:	int available;
+        -:    9:	ITEM item;
+        -:   10:	FILE *file1, *file2;
+        -:   11:	
+        1:   12:    printf("\v\v\t\t\t\t\t\t\tDelete Product\n");
+        1:   13:    printf("\t\t\t\t\t\t**********\n");
+        -:   14:	    
+        1:   15:    file1 = fopen("Record.txt", "rb");
+        1:   16:    displayProduct();
+        1:   17:    printf("\n\t\t\t\t\t\tEnter the Product code to delete: ");
+        1:   18:    scanf("%s",code);
+        1:   19:    system("clear");
+        1:   20:    available = isCodeAvailable(code);
+        1:   21:    if (available == 0)
+        -:   22:    {
+    #####:   23:        system("clear");
+    #####:   24:        printf("\033[1;31m");
+    #####:   25:        printf("\n\v\t\t\t\t\t\t* Product is not available.\n");
+    #####:   26:        printf("\033[0m");
+        -:   27:    }
+        -:   28:    else
+        -:   29:    {
+        -:   30:
+        1:   31:        file2 = fopen("tempfile.txt", "wb");
+        5:   32:        while (fread(&item, sizeof(item), 1, file1))
+        -:   33:        {
+        4:   34:            strcpy(product, item.product_code);
+        4:   35:            if (strcmp(product, code) != 0)
+        -:   36:            {
+        3:   37:                fwrite(&item, sizeof(item), 1, file2);
+        -:   38:            }
+        -:   39:        }
+        1:   40:        fclose(file1);
+        1:   41:        fclose(file2);
+        1:   42:        file1 = fopen("Record.txt", "wb");
+        1:   43:        file2 = fopen("tempfile.txt", "rb");
+        4:   44:        while (fread(&item, sizeof(item), 1, file2))
+        -:   45:        {
+        3:   46:            fwrite(&item, sizeof(item), 1, file1);
+        -:   47:        }
+        1:   48:        printf("\n\v\t\t\t\t\t\tProduct deleted sucessfully!!\n\n");
+        1:   49:        fclose(file1);
+        1:   50:        fclose(file2);
+        -:   51:    }
+        -:   52:
+        1:   53:}

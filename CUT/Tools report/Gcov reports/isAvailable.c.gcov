@@ -1,0 +1,65 @@
+        -:    0:Source:isAvailable.c
+        -:    0:Graph:a-isAvailable.gcno
+        -:    0:Data:a-isAvailable.gcda
+        -:    0:Runs:2
+        -:    1:#include <header.h>
+        -:    2:
+        -:    3:/* 	function to check if the given product code is available	*/
+        -:    4:
+        7:    5:int isCodeAvailable(char code[])
+        -:    6:{
+        -:    7:    FILE *file;
+        -:    8:    ITEM item;
+        7:    9:    file = fopen("Record.txt", "r");
+        -:   10:    
+       21:   11:    while (!feof(file))
+        -:   12:    {
+       18:   13:        fread(&item, sizeof(item), 1, file);
+       18:   14:        if (strcmp(code, item.product_code) == 0)
+        -:   15:        {
+        4:   16:            fclose(file);
+        4:   17:            return 1;
+        -:   18:        }
+        -:   19:    }
+        3:   20:    fclose(file);
+        3:   21:    return 0;
+        -:   22:}
+        -:   23:
+        -:   24:/*	Function to check the quentity during the sale product.	*/
+        -:   25:
+    #####:   26:int isProductAvailable(int quantity)
+        -:   27:{
+        -:   28:    FILE *file;
+        -:   29:    ITEM item;
+    #####:   30:    file = fopen("Record.txt", "r");
+    #####:   31:    while (!feof(file))
+        -:   32:    {
+    #####:   33:        fread(&item, sizeof(item), 1, file);
+    #####:   34:        if (item.quantity >= quantity)
+        -:   35:        {
+    #####:   36:            fclose(file);
+    #####:   37:            return 1;
+        -:   38:        }
+        -:   39:    }
+    #####:   40:    fclose(file);
+    #####:   41:    return 0;
+        -:   42:}
+        -:   43:
+        -:   44:/* function to check the choice is integer or not  */
+        -:   45:
+    #####:   46:int getChoice(int input)
+        -:   47:{
+        -:   48:    char ch;
+    #####:   49:    while (scanf("%d", &input) != 1)
+        -:   50:    {
+    #####:   51:        while ((ch = getchar()) != '\n')
+        -:   52:        {
+        -:   53:        }
+    #####:   54:        printf("\033[1;31m");
+    #####:   55:        printf("\n\v\t\t\t\t\t\tMust be positive integer.\n");
+    #####:   56:        printf("\033[0m");
+    #####:   57:        printf("\t\t\t\t\tEnter Positive integer value, such as 1,2,3,4: ");
+        -:   58:    }
+        -:   59:
+    #####:   60:    return input;
+        -:   61:}

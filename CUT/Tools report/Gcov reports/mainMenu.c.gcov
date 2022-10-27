@@ -1,0 +1,37 @@
+        -:    0:Source:mainMenu.c
+        -:    0:Graph:a-mainMenu.gcno
+        -:    0:Data:a-mainMenu.gcda
+        -:    0:Runs:2
+        -:    1:#include <header.h>
+        -:    2:
+        -:    3:/*	mainMenu function start	*/
+        -:    4:
+        2:    5:void mainMenu()
+        -:    6:{
+        -:    7:	int choice;
+        -:    8:	
+        2:    9:	system("clear");
+        2:   10:	printf("\n\t\t####################WELCOME TO DEPARTMEANTAL STORE MANAGEMENT SYSTEM###############");
+        2:   11:	printf("\n\t\t\t\tPress\t0\tfor exit\n");
+        2:   12:	printf("\n\t\t\t\tPress\t1\t Admin Login\n\t\t\t\tchoice :");
+        2:   13:	scanf("%d", &choice);
+        2:   14:	if(choice==0)
+        -:   15:	{
+    #####:   16:		system("clear");
+    #####:   17:		closeApp();
+        -:   18:	}
+        2:   19:	switch(choice)
+        -:   20:	{
+        2:   21:		case 1:
+        2:   22:			system("clear");
+        2:   23:			login();
+    #####:   24:			break;
+    #####:   25:	default:
+    #####:   26:			system("clear");
+    #####:   27:			printf("\nchoose valid Input..");
+    #####:   28:			system("clear");
+    #####:   29:			mainMenu();
+    #####:   30:			break;
+        -:   31:	}
+    #####:   32:}
+        -:   33:	/*	END OF MAINMENU FUNCTION	*/

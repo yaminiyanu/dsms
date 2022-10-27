@@ -1,0 +1,47 @@
+        -:    0:Source:addProduct.c
+        -:    0:Graph:a-addProduct.gcno
+        -:    0:Data:a-addProduct.gcda
+        -:    0:Runs:2
+        -:    1:#include <header.h>
+        -:    2:
+        2:    3:int addProduct()
+        -:    4:{
+        -:    5:	char code[MAX];
+        -:    6:    int temp;
+        -:    7:    ITEM item;
+        -:    8:    FILE *file;
+        2:    9:    printf("\v\v\t\t\t\t\t\t\tAdd Product\n");
+        2:   10:    printf("\t\t\t\t\t\t**********\n");
+        2:   11:    printf("\n\t\t\t\t\tEnter the \" end \" to exit for here");
+        2:   12:    printf("\n\t\t\t\t\tEnter Product code: ");
+        2:   13:    scanf("%s", code);
+        2:   14:    file = fopen("Record.txt", "ab");
+        2:   15:    if (strcmp(code, "end") == 0)
+        -:   16:    {
+    #####:   17:        system("clear");
+    #####:   18:        options();
+        -:   19:    }
+        -:   20:    int available;
+        2:   21:    available = isCodeAvailable(code); /* return 1 if code id found and return 0 if the code is not available. */
+        2:   22:    if (available == 1)
+        -:   23:    {
+    #####:   24:        system("clear");
+    #####:   25:        printf("\033[1;31m");
+    #####:   26:        printf("\n\v\t\t\t\t\t\t* Product is already there.\n");
+    #####:   27:        printf("\033[0m");
+    #####:   28:        options();
+        -:   29:    }
+        2:   30:    strcpy(item.product_code, code); /* copy the code to the structure item	*/
+        2:   31:    printf("\t\t\t\t\tEnter Product Name: ");
+        2:   32:    scanf("%s", item.product_name);
+        2:   33:    printf("\n\t\t\t\t\tEnter Product Rate: ");
+        2:   34:    temp = checkRate();
+        2:   35:    item.rate = temp;
+        2:   36:    printf("\n\t\t\t\t\tEnter Quantity: ");
+        2:   37:    scanf("%d", &item.quantity);
+        2:   38:    fwrite(&item, sizeof(item), 1, file);/*	 writing structure to a file	*/
+        2:   39:    fclose(file);
+        2:   40:	return 0;
+        -:   41:
+        -:   42:}
+        -:   43: /* End of addproduct function	*/
